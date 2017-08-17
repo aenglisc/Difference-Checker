@@ -1,0 +1,22 @@
+{
+  "name": "project-s2",
+  "version": "0.0.1",
+  "description": "hexlet-projects-project2",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aenglisc/project-lvl2-s117.git"
+  },
+  "keywords": [
+    "hexlet"
+  ],
+  "author": "Roman Pushkov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aenglisc/project-lvl2-s117/issues"
+  },
+  "homepage": "https://github.com/aenglisc/project-lvl2-s117#readme"
+}
