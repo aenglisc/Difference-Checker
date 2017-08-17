@@ -8,5 +8,3 @@ program
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfig> <secondConfig>')
   .parse(process.argv);
-
-console.log('working');
