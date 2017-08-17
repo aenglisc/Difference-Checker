@@ -11,12 +11,6 @@ build:
 publish:
 	npm publish
 
-g:
-	npm install -g
-
-ung:
-	npm uninstall -g
-
 lint:
 	npm run eslint .
 
