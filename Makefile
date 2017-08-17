@@ -19,3 +19,5 @@ ung:
 
 lint:
 	npm run eslint .
+
+.PHONY: test
