@@ -1,7 +1,7 @@
 ---
 
 plugins:
-  -jest
+  - jest
 
 env:
   node: true
