@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
+import yaml from 'js-yaml';
 
 export const getFile = (filePath) => {
   const data = fs.readFileSync(filePath, 'utf8');
@@ -8,7 +9,7 @@ export const getFile = (filePath) => {
   return { data, extension };
 };
 
-export const compareData = (oldData, newData) => {
+const compareData = (oldData, newData) => {
   const oldKeys = Object.keys(oldData);
   const newKeys = Object.keys(newData);
   const allKeys = _.union(oldKeys, newKeys);
@@ -34,12 +35,20 @@ export const compareData = (oldData, newData) => {
   return `{\n${diff}}`;
 };
 
-export const compareFiles = (oldFile, newFile) => {
-  if (oldFile.extension === '.json' && newFile.extension === '.json') {
-    const oldData = JSON.parse(oldFile.data);
-    const newData = JSON.parse(newFile.data);
-
-    return compareData(oldData, newData);
+const parseFile = (file) => {
+  switch (file.extension) {
+    case '.json':
+      return JSON.parse(file.data);
+    case '.yml':
+      return yaml.safeLoad(file.data);
+    default:
+      throw new Error('Invalid extension');
   }
-  throw new Error('Invalid extension');
+};
+
+export const compareFiles = (oldFile, newFile) => {
+  const oldData = parseFile(oldFile);
+  const newData = parseFile(newFile);
+
+  return compareData(oldData, newData);
 };
