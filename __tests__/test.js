@@ -26,8 +26,7 @@ describe('Config differences', () => {
   it('Invalid extension', () => {
     const file1 = `${samplesPath}erroneous/error.txt`;
     const file2 = `${samplesPath}erroneous/error.txt`;
-    const error = new Error('Invalid extension');
     expect(() => gendiff(file1, file2))
-      .toThrow(error);
+      .toThrow();
   });
 });
