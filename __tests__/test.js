@@ -12,13 +12,13 @@ describe('Config differences', () => {
   });
 
   it('YAML/YAML', () => {
-    const oldJSON = `${samplesPath}yaml/before.yml`;
-    const newJSON = `${samplesPath}yaml/after.yml`;
-    expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
+    const oldYAML = `${samplesPath}yaml/before.yml`;
+    const newYAML = `${samplesPath}yaml/after.yml`;
+    expect(gendiff(oldYAML, newYAML)).toBe(expectedDiff);
   });
 
   it('YAML/JSON', () => {
-    const oldJSON = `${samplesPath}yaml/before.yml`;
+    const oldYAML = `${samplesPath}yaml/before.yml`;
     const newJSON = `${samplesPath}json/after.json`;
     expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
   });
