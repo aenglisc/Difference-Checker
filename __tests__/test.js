@@ -20,7 +20,7 @@ describe('Config differences', () => {
   it('YAML/JSON', () => {
     const oldYAML = `${samplesPath}yaml/before.yml`;
     const newJSON = `${samplesPath}json/after.json`;
-    expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
+    expect(gendiff(oldYAML, newJSON)).toBe(expectedDiff);
   });
 
   it('Invalid extension', () => {
