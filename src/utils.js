@@ -9,6 +9,13 @@ export const getFile = (filePath) => {
   return { data, extension };
 };
 
+const extensions = {
+  '.json': data => JSON.parse(data),
+  '.yml': data => yaml.safeLoad(data),
+};
+
+const parseFile = file => extensions[file.extension](file.data);
+
 const compareData = (oldData, newData) => {
   const oldKeys = Object.keys(oldData);
   const newKeys = Object.keys(newData);
@@ -33,17 +40,6 @@ const compareData = (oldData, newData) => {
   }, '');
 
   return `{\n${diff}}`;
-};
-
-const parseFile = (file) => {
-  switch (file.extension) {
-    case '.json':
-      return JSON.parse(file.data);
-    case '.yml':
-      return yaml.safeLoad(file.data);
-    default:
-      throw new Error('Invalid extension');
-  }
 };
 
 export const compareFiles = (oldFile, newFile) => {
