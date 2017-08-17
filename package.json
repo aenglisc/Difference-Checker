@@ -1,8 +1,11 @@
 {
   "name": "gendiff-by-roman",
   "version": "0.0.1",
-  "description": "hexlet-projects-project2",
+  "description": "Compares two config files and shows the difference between them",
   "main": "/src/bin/gendiff.js",
+  "bin": {
+    "gendiff-by-roman": "dist/bin/gendiff.js"
+  },
   "scripts": {
     "babel-node": "babel-node",
     "eslint": "eslint",
