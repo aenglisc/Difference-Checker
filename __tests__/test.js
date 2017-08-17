@@ -11,6 +11,18 @@ describe('Config differences', () => {
     expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
   });
 
+  it('YAML/YAML', () => {
+    const oldJSON = `${samplesPath}yaml/before.yml`;
+    const newJSON = `${samplesPath}yaml/after.yml`;
+    expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
+  });
+
+  it('YAML/JSON', () => {
+    const oldJSON = `${samplesPath}yaml/before.yml`;
+    const newJSON = `${samplesPath}json/after.json`;
+    expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
+  });
+
   it('Invalid extension', () => {
     const file1 = `${samplesPath}erroneous/error.txt`;
     const file2 = `${samplesPath}erroneous/error.txt`;
