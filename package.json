@@ -1,6 +1,6 @@
 {
   "name": "gendiff-by-roman",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compares two config files and shows the difference between them",
   "main": "index.js",
   "bin": {
