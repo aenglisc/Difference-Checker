@@ -33,3 +33,13 @@ export const compareData = (oldData, newData) => {
 
   return `{\n${diff}}`;
 };
+
+export const compareFiles = (oldFile, newFile) => {
+  if (oldFile.extension === '.json' && newFile.extension === '.json') {
+    const oldData = JSON.parse(oldFile.data);
+    const newData = JSON.parse(newFile.data);
+
+    return compareData(oldData, newData);
+  }
+  throw new Error('Invalid extension');
+};
