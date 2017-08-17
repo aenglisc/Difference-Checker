@@ -1,8 +1,8 @@
 {
   "name": "gendiff-by-roman",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Compares two config files and shows the difference between them",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
     "gendiff-by-roman": "dist/bin/gendiff.js"
   },
