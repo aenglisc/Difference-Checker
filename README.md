@@ -1,1 +1,3 @@
 # project-lvl2-s117
+
+<a href="https://codeclimate.com/github/aenglisc/project-lvl2-s117"><img src="https://codeclimate.com/github/aenglisc/project-lvl2-s117/badges/gpa.svg" /></a> <a href="https://codeclimate.com/github/aenglisc/project-lvl2-s117"><img src="https://codeclimate.com/github/aenglisc/project-lvl2-s117/badges/issue_count.svg" /></a> <img src="https://travis-ci.org/aenglisc/project-lvl2-s117.svg?branch=master" />
