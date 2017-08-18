@@ -1,43 +1,53 @@
 import gendiff from '../src';
 
 describe('Config differences', () => {
-  const samplesPath = './__tests__/sample_files/';
   const expectedDiff =
   '{\n    host: hexlet.io\n  + timeout: 20\n  - timeout: 50\n  - proxy: 123.234.53.22\n  + verbose: true\n}';
 
+  const samplesPathFlat = './__tests__/sample_files/flat/';
+
+  const oldJSONFlat = `${samplesPathFlat}json/before.json`;
+  const newJSONFlat = `${samplesPathFlat}json/after.json`;
+
+  const oldYAMLFlat = `${samplesPathFlat}yaml/before.yml`;
+  const newYAMLFlat = `${samplesPathFlat}yaml/after.yml`;
+
+  const oldINIFlat = `${samplesPathFlat}ini/before.ini`;
+  const newINIFlat = `${samplesPathFlat}ini/after.ini`;
+/*
+  const samplesPathRec = './__tests__/sample_files/recursive/';
+
+  const oldJSONRec = `${samplesPathRec}json/before.json`;
+  const newJSONRec = `${samplesPathRec}json/after.json`;
+
+  const oldYAMLRec = `${samplesPathRec}yaml/before.yml`;
+  const newYAMLRec = `${samplesPathRec}yaml/after.yml`;
+
+  const oldINIRec = `${samplesPathRec}ini/before.ini`;
+  const newINIRec = `${samplesPathRec}ini/after.ini`;
+*/
   it('JSON/JSON', () => {
-    const oldJSON = `${samplesPath}json/before.json`;
-    const newJSON = `${samplesPath}json/after.json`;
-    expect(gendiff(oldJSON, newJSON)).toBe(expectedDiff);
+    expect(gendiff(oldJSONFlat, newJSONFlat)).toBe(expectedDiff);
   });
 
   it('YAML/YAML', () => {
-    const oldYAML = `${samplesPath}yaml/before.yml`;
-    const newYAML = `${samplesPath}yaml/after.yml`;
-    expect(gendiff(oldYAML, newYAML)).toBe(expectedDiff);
+    expect(gendiff(oldYAMLFlat, newYAMLFlat)).toBe(expectedDiff);
   });
 
   it('YAML/JSON', () => {
-    const oldYAML = `${samplesPath}yaml/before.yml`;
-    const newJSON = `${samplesPath}json/after.json`;
-    expect(gendiff(oldYAML, newJSON)).toBe(expectedDiff);
+    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiff);
   });
 
   it('INI/INI', () => {
-    const oldINI = `${samplesPath}ini/before.ini`;
-    const newINI = `${samplesPath}ini/after.ini`;
-    expect(gendiff(oldINI, newINI)).toBe(expectedDiff);
+    expect(gendiff(oldINIFlat, newINIFlat)).toBe(expectedDiff);
   });
 
   it('INI/JSON', () => {
-    const oldINI = `${samplesPath}ini/before.ini`;
-    const newJSON = `${samplesPath}json/after.json`;
-    expect(gendiff(oldINI, newJSON)).toBe(expectedDiff);
+    expect(gendiff(oldINIFlat, newJSONFlat)).toBe(expectedDiff);
   });
 
   it('Invalid extension', () => {
-    const file1 = `${samplesPath}erroneous/error.txt`;
-    const file2 = `${samplesPath}erroneous/error.txt`;
-    expect(() => gendiff(file1, file2)).toThrowError();
+    const errorFile = `./__tests__/sample_files/erroneous/error.txt`;
+    expect(() => gendiff(errorFile, errorFile)).toThrowError();
   });
 });
