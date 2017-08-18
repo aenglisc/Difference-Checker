@@ -23,6 +23,18 @@ describe('Config differences', () => {
     expect(gendiff(oldYAML, newJSON)).toBe(expectedDiff);
   });
 
+  it('INI/INI', () => {
+    const oldINI = `${samplesPath}ini/before.ini`;
+    const newINI = `${samplesPath}ini/after.ini`;
+    expect(gendiff(oldINI, newINI)).toBe(expectedDiff);
+  });
+
+  it('INI/JSON', () => {
+    const oldINI = `${samplesPath}ini/before.ini`;
+    const newJSON = `${samplesPath}json/after.json`;
+    expect(gendiff(oldINI, newJSON)).toBe(expectedDiff);
+  });
+
   it('Invalid extension', () => {
     const file1 = `${samplesPath}erroneous/error.txt`;
     const file2 = `${samplesPath}erroneous/error.txt`;
