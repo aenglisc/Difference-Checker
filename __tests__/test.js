@@ -47,7 +47,7 @@ describe('Config differences', () => {
   });
 
   it('Invalid extension', () => {
-    const errorFile = `./__tests__/sample_files/erroneous/error.txt`;
+    const errorFile = './__tests__/sample_files/erroneous/error.txt';
     expect(() => gendiff(errorFile, errorFile)).toThrowError();
   });
 });
