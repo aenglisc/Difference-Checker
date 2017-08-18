@@ -1,8 +1,15 @@
+import fs from 'fs';
 import gendiff from '../src';
 
 describe('Config differences', () => {
-  const expectedDiff =
-  '{\n    host: hexlet.io\n  + timeout: 20\n  - timeout: 50\n  - proxy: 123.234.53.22\n  + verbose: true\n}';
+  // wrong extension throws an error
+  it('Invalid extension', () => {
+    const errorFile = './__tests__/sample_files/erroneous/error.txt';
+    expect(() => gendiff(errorFile, errorFile)).toThrowError();
+  });
+
+  // flat tests
+  const expectedDiffFlat = fs.readFileSync('./__tests__/sample_files/expected/flat.txt', 'utf8');
 
   const samplesPathFlat = './__tests__/sample_files/flat/';
 
@@ -14,7 +21,30 @@ describe('Config differences', () => {
 
   const oldINIFlat = `${samplesPathFlat}ini/before.ini`;
   const newINIFlat = `${samplesPathFlat}ini/after.ini`;
-/*
+
+  it('Flat JSON/JSON', () => {
+    expect(gendiff(oldJSONFlat, newJSONFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat YAML/YAML', () => {
+    expect(gendiff(oldYAMLFlat, newYAMLFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat YAML/JSON', () => {
+    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat INI/INI', () => {
+    expect(gendiff(oldINIFlat, newINIFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat INI/JSON', () => {
+    expect(gendiff(oldINIFlat, newJSONFlat)).toBe(expectedDiffFlat);
+  });
+
+  // recursive tests
+  const expectedDiffRec = fs.readFileSync('./__tests__/sample_files/expected/recursive.txt', 'utf8');
+
   const samplesPathRec = './__tests__/sample_files/recursive/';
 
   const oldJSONRec = `${samplesPathRec}json/before.json`;
@@ -25,29 +55,24 @@ describe('Config differences', () => {
 
   const oldINIRec = `${samplesPathRec}ini/before.ini`;
   const newINIRec = `${samplesPathRec}ini/after.ini`;
-*/
-  it('JSON/JSON', () => {
-    expect(gendiff(oldJSONFlat, newJSONFlat)).toBe(expectedDiff);
+
+  it('Recursive JSON/JSON', () => {
+    expect(gendiff(oldJSONRec, newJSONRec)).toBe(expectedDiffRec);
   });
 
-  it('YAML/YAML', () => {
-    expect(gendiff(oldYAMLFlat, newYAMLFlat)).toBe(expectedDiff);
+  it('Recursive YAML/YAML', () => {
+    expect(gendiff(oldYAMLRec, newYAMLRec)).toBe(expectedDiffRec);
   });
 
-  it('YAML/JSON', () => {
-    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiff);
+  it('Recursive YAML/JSON', () => {
+    expect(gendiff(oldYAMLRec, newJSONRec)).toBe(expectedDiffRec);
   });
 
-  it('INI/INI', () => {
-    expect(gendiff(oldINIFlat, newINIFlat)).toBe(expectedDiff);
+  it('Recursive INI/INI', () => {
+    expect(gendiff(oldINIRec, newINIRec)).toBe(expectedDiffRec);
   });
 
-  it('INI/JSON', () => {
-    expect(gendiff(oldINIFlat, newJSONFlat)).toBe(expectedDiff);
-  });
-
-  it('Invalid extension', () => {
-    const errorFile = './__tests__/sample_files/erroneous/error.txt';
-    expect(() => gendiff(errorFile, errorFile)).toThrowError();
+  it('Recursive INI/JSON', () => {
+    expect(gendiff(oldINIRec, newJSONRec)).toBe(expectedDiffRec);
   });
 });
