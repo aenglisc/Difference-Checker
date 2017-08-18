@@ -1,8 +1,13 @@
-import { getFile, compareFiles } from './utils';
+import getFile from './getFile';
+import parseFile from './parseFile';
+import compareData from './compareData';
 
 export default (oldFilePath, newFilePath) => {
   const oldFile = getFile(oldFilePath);
   const newFile = getFile(newFilePath);
 
-  return compareFiles(oldFile, newFile);
+  const oldData = parseFile(oldFile);
+  const newData = parseFile(newFile);
+
+  return compareData(oldData, newData);
 };
