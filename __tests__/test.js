@@ -5,13 +5,15 @@ describe('Config differences', () => {
   // wrong extension throws an error
   it('Invalid extension', () => {
     const errorFile = './__tests__/sample_files/erroneous/error.txt';
-    expect(() => gendiff(errorFile, errorFile)).toThrowError();
+    expect(() => gendiff(errorFile, errorFile)).toThrow('.txt files are not supported');
   });
 
-  // flat tests
-  const expectedDiffFlat = fs.readFileSync('./__tests__/sample_files/expected/flat.txt', 'utf8');
+  const basePath = './__tests__/sample_files/';
 
-  const samplesPathFlat = './__tests__/sample_files/flat/';
+  // flat tests
+  const expectedDiffFlat = fs.readFileSync(`${basePath}expected/flat.txt`, 'utf8');
+
+  const samplesPathFlat = `${basePath}flat/`;
 
   const oldJSONFlat = `${samplesPathFlat}json/before.json`;
   const newJSONFlat = `${samplesPathFlat}json/after.json`;
@@ -43,9 +45,9 @@ describe('Config differences', () => {
   });
 
   // nested tests
-  const expectedDiffNested = fs.readFileSync('./__tests__/sample_files/expected/nested.txt', 'utf8');
+  const expectedDiffNested = fs.readFileSync(`${basePath}expected/nested.txt`, 'utf8');
 
-  const samplesPathNested = './__tests__/sample_files/nested/';
+  const samplesPathNested = `${basePath}nested/`;
 
   const oldJSONNested = `${samplesPathNested}json/before.json`;
   const newJSONNested = `${samplesPathNested}json/after.json`;
@@ -74,5 +76,22 @@ describe('Config differences', () => {
 
   it('Nested INI/JSON', () => {
     expect(gendiff(oldININested, newJSONNested)).toBe(expectedDiffNested);
+  });
+
+  // plain option tests
+  const expectedDiffPlain = fs.readFileSync(`${basePath}expected/option_plain.txt`, 'utf8');
+
+  const samplesPathPlain = `${basePath}option_plain/`;
+
+  const oldPlain = `${samplesPathPlain}before.json`;
+  const newPlain = `${samplesPathPlain}after.json`;
+
+  // wrong format throws an error
+  it('Invalid format', () => {
+    expect(() => gendiff(oldPlain, newPlain, 'trousers')).toThrow('trousers is not a proper format');
+  });
+
+  it('Nested JSON/JSON Plain', () => {
+    expect(gendiff(oldPlain, newPlain, 'plain')).toBe(expectedDiffPlain);
   });
 });
