@@ -30,49 +30,49 @@ describe('Config differences', () => {
     expect(gendiff(oldYAMLFlat, newYAMLFlat)).toBe(expectedDiffFlat);
   });
 
-  it('Flat YAML/JSON', () => {
-    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiffFlat);
-  });
-
   it('Flat INI/INI', () => {
     expect(gendiff(oldINIFlat, newINIFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat YAML/JSON', () => {
+    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiffFlat);
   });
 
   it('Flat INI/JSON', () => {
     expect(gendiff(oldINIFlat, newJSONFlat)).toBe(expectedDiffFlat);
   });
 
-  // recursive tests
-  const expectedDiffRec = fs.readFileSync('./__tests__/sample_files/expected/recursive.txt', 'utf8');
+  // nested tests
+  const expectedDiffNested = fs.readFileSync('./__tests__/sample_files/expected/nested.txt', 'utf8');
 
-  const samplesPathRec = './__tests__/sample_files/recursive/';
+  const samplesPathNested = './__tests__/sample_files/nested/';
 
-  const oldJSONRec = `${samplesPathRec}json/before.json`;
-  const newJSONRec = `${samplesPathRec}json/after.json`;
+  const oldJSONNested = `${samplesPathNested}json/before.json`;
+  const newJSONNested = `${samplesPathNested}json/after.json`;
 
-  const oldYAMLRec = `${samplesPathRec}yaml/before.yml`;
-  const newYAMLRec = `${samplesPathRec}yaml/after.yml`;
+  const oldYAMLNested = `${samplesPathNested}yaml/before.yml`;
+  const newYAMLNested = `${samplesPathNested}yaml/after.yml`;
 
-  const oldINIRec = `${samplesPathRec}ini/before.ini`;
-  const newINIRec = `${samplesPathRec}ini/after.ini`;
+  const oldININested = `${samplesPathNested}ini/before.ini`;
+  const newININested = `${samplesPathNested}ini/after.ini`;
 
-  it('Recursive JSON/JSON', () => {
-    expect(gendiff(oldJSONRec, newJSONRec)).toBe(expectedDiffRec);
+  it('nested JSON/JSON', () => {
+    expect(gendiff(oldJSONNested, newJSONNested)).toBe(expectedDiffNested);
   });
 
-  it('Recursive YAML/YAML', () => {
-    expect(gendiff(oldYAMLRec, newYAMLRec)).toBe(expectedDiffRec);
+  it('nested YAML/YAML', () => {
+    expect(gendiff(oldYAMLNested, newYAMLNested)).toBe(expectedDiffNested);
   });
 
-  it('Recursive YAML/JSON', () => {
-    expect(gendiff(oldYAMLRec, newJSONRec)).toBe(expectedDiffRec);
+  it('nested INI/INI', () => {
+    expect(gendiff(oldININested, newININested)).toBe(expectedDiffNested);
   });
 
-  it('Recursive INI/INI', () => {
-    expect(gendiff(oldINIRec, newINIRec)).toBe(expectedDiffRec);
+  it('nested YAML/JSON', () => {
+    expect(gendiff(oldYAMLNested, newJSONNested)).toBe(expectedDiffNested);
   });
 
-  it('Recursive INI/JSON', () => {
-    expect(gendiff(oldINIRec, newJSONRec)).toBe(expectedDiffRec);
+  it('nested INI/JSON', () => {
+    expect(gendiff(oldININested, newJSONNested)).toBe(expectedDiffNested);
   });
 });
