@@ -1,14 +1,14 @@
 #!/usr/local/bin/node
 import program from 'commander';
-import json from '../../package.json';
+import packageData from '../../package.json';
 import gendiff from '..';
 
 program
-  .version(json.version)
-  .description(json.description)
+  .version(packageData.version)
+  .description(packageData.description)
   .option('-f, --format [type]', 'output format')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
-    console.log(gendiff(firstConfig, secondConfig));
+    console.log(gendiff(firstConfig, secondConfig, program.format));
   })
   .parse(process.argv);
