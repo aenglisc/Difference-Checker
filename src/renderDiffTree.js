@@ -75,7 +75,7 @@ const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
     default:
       return acc;
   }
-}, '').slice(0, -1);
+}, '').trim();
 
 const formats = {
   default: tree => defaultRender(tree),
