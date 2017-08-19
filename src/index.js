@@ -1,13 +1,9 @@
-import getFile from './getFile';
-import parseFile from './parseFile';
-import compareData from './compareData';
+import getConfig from './getConfig';
+import compareConfigs from './compareConfigs';
 
 export default (oldFilePath, newFilePath) => {
-  const oldFile = getFile(oldFilePath);
-  const newFile = getFile(newFilePath);
+  const oldConfig = getConfig(oldFilePath);
+  const newConfig = getConfig(newFilePath);
 
-  const oldData = parseFile(oldFile);
-  const newData = parseFile(newFile);
-
-  return compareData(oldData, newData);
+  return compareConfigs(oldConfig, newConfig);
 };
