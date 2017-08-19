@@ -56,23 +56,23 @@ describe('Config differences', () => {
   const oldININested = `${samplesPathNested}ini/before.ini`;
   const newININested = `${samplesPathNested}ini/after.ini`;
 
-  it('nested JSON/JSON', () => {
+  it('Nested JSON/JSON', () => {
     expect(gendiff(oldJSONNested, newJSONNested)).toBe(expectedDiffNested);
   });
 
-  it('nested YAML/YAML', () => {
+  it('Nested YAML/YAML', () => {
     expect(gendiff(oldYAMLNested, newYAMLNested)).toBe(expectedDiffNested);
   });
 
-  it('nested INI/INI', () => {
+  it('Nested INI/INI', () => {
     expect(gendiff(oldININested, newININested)).toBe(expectedDiffNested);
   });
 
-  it('nested YAML/JSON', () => {
+  it('Nested YAML/JSON', () => {
     expect(gendiff(oldYAMLNested, newJSONNested)).toBe(expectedDiffNested);
   });
 
-  it('nested INI/JSON', () => {
+  it('Nested INI/JSON', () => {
     expect(gendiff(oldININested, newJSONNested)).toBe(expectedDiffNested);
   });
 });
