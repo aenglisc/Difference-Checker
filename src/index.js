@@ -1,9 +1,25 @@
-import getConfig from './getConfig';
-import compareConfigs from './compareConfigs';
+import fs from 'fs';
+import path from 'path';
+import parseFile from './parseFile';
 
-export default (oldFilePath, newFilePath) => {
-  const oldConfig = getConfig(oldFilePath);
-  const newConfig = getConfig(newFilePath);
+import getDiffTree from './getDiffTree';
+import renderDiffTree from './renderDiffTree';
 
-  return compareConfigs(oldConfig, newConfig);
+const getConfigObject = (filePath) => {
+  const data = fs.readFileSync(filePath, 'utf8');
+  const extension = path.extname(filePath, 'utf8');
+  const fileObject = { data, extension };
+  const configObject = parseFile(fileObject);
+  return configObject;
+};
+
+export default (oldFilePath, newFilePath, format = 'default') => {
+  const oldConfigObject = getConfigObject(oldFilePath);
+  const newConfigObject = getConfigObject(newFilePath);
+
+  const tree = getDiffTree(oldConfigObject, newConfigObject);
+  const treeObject = { tree, format };
+
+  const result = renderDiffTree(treeObject);
+  return result;
 };
