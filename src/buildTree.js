@@ -38,4 +38,4 @@ const buildTree = (oldObj, newObj) => {
   return tree;
 };
 
-export default configObjects => buildTree(configObjects.old, configObjects.new);
+export default (oldObj, newObj) => buildTree(oldObj, newObj);

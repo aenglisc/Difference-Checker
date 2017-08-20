@@ -8,9 +8,9 @@ const extensions = {
   '.ini': data => ini.parse(data),
 };
 
-export default (fileObject) => {
-  if (fileObject.extension in extensions) {
-    return extensions[fileObject.extension](fileObject.data);
+export default (data, extension) => {
+  if (extension in extensions) {
+    return extensions[extension](data);
   }
-  throw new Error(`${fileObject.extension} files are not supported`);
+  throw new Error(`${extension} files are not supported`);
 };

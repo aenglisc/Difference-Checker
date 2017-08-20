@@ -8,9 +8,9 @@ const formats = {
   json: tree => jsonRender(tree),
 };
 
-export default (treeObject) => {
-  if (treeObject.format in formats) {
-    return formats[treeObject.format](treeObject.tree);
+export default (tree, format) => {
+  if (format in formats) {
+    return formats[format](tree);
   }
-  throw new Error(`${treeObject.format} is not a proper format`);
+  throw new Error(`${format} is not a proper format`);
 };

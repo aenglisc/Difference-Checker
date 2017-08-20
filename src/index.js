@@ -5,26 +5,19 @@ import buildTree from './buildTree';
 import renderTree from './render';
 
 const getConfigObject = (filePath) => {
-  const fileObject = {
-    data: fs.readFileSync(filePath, 'utf8'),
-    extension: path.extname(filePath, 'utf8'),
-  };
+  const data = fs.readFileSync(filePath, 'utf8');
+  const extension = path.extname(filePath, 'utf8');
 
-  const configObject = parseFile(fileObject);
+  const configObject = parseFile(data, extension);
   return configObject;
 };
 
 export default (oldFilePath, newFilePath, format = 'padded') => {
-  const configObjects = {
-    old: getConfigObject(oldFilePath),
-    new: getConfigObject(newFilePath),
-  };
+  const oldObj = getConfigObject(oldFilePath);
+  const newObj = getConfigObject(newFilePath);
 
-  const treeObject = {
-    tree: buildTree(configObjects),
-    format,
-  };
+  const tree = buildTree(oldObj, newObj);
 
-  const result = renderTree(treeObject);
+  const result = renderTree(tree, format);
   return result;
 };
