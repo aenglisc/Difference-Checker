@@ -1,6 +1,0 @@
----
-
-eslint:
-  enabled: true
-  config:
-    config: .eslintrc.yml
