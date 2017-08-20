@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import parseFile from './parseFile';
 
-import getDiffTree from './getDiffTree';
-import renderDiffTree from './renderDiffTree';
+import buildTree from './buildTree';
+import renderTree from './render';
 
 const getConfigObject = (filePath) => {
   const data = fs.readFileSync(filePath, 'utf8');
@@ -13,13 +13,13 @@ const getConfigObject = (filePath) => {
   return configObject;
 };
 
-export default (oldFilePath, newFilePath, format = 'default') => {
+export default (oldFilePath, newFilePath, format = 'padded') => {
   const oldConfigObject = getConfigObject(oldFilePath);
   const newConfigObject = getConfigObject(newFilePath);
 
-  const tree = getDiffTree(oldConfigObject, newConfigObject);
+  const tree = buildTree(oldConfigObject, newConfigObject);
   const treeObject = { tree, format };
 
-  const result = renderDiffTree(treeObject);
+  const result = renderTree(treeObject);
   return result;
 };
