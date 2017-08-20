@@ -1,4 +1,4 @@
 eslint:
   enabled: true
   config:
-    config: .eslintrc
+    config: .eslintrc.yml
