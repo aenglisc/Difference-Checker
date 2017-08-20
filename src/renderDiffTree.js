@@ -77,17 +77,17 @@ const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
       return acc;
   }
 }, '');
-
+/*
 const jsonRender = tree => {
   return tree.reduce((acc, node) => {
-    return `${acc}\n${node}`;
+    return `${acc}${node}\n`;
   }, '');
 };
-
+*/
 const formats = {
   default: tree => defaultRender(tree),
   plain: tree => plainRender(tree).trim(),
-  json: tree => jsonRender(tree),
+//  json: tree => jsonRender(tree),
 };
 
 export default (treeObject) => {
