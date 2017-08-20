@@ -1,8 +1,12 @@
 import _ from 'lodash';
 
 const createdValueFormat = (value) => {
-  if (_.isObject(value)) { return 'complex value'; }
-  if (typeof value !== 'string') { return `value: ${value}`; }
+  if (_.isObject(value)) {
+    return 'complex value';
+  }
+  if (typeof value !== 'string') {
+    return `value: ${value}`;
+  }
   return `'${value}'`;
 };
 
