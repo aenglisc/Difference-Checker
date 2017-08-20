@@ -32,4 +32,4 @@ const buildTree = (oldObj, newObj) => {
   return tree;
 };
 
-export default (oldConfigObject, newConfigObject) => buildTree(oldConfigObject, newConfigObject);
+export default configObjects => buildTree(configObjects.old, configObjects.new);
