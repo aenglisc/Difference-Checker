@@ -1,7 +1,5 @@
-/* eslint-disable */
 import yaml from 'js-yaml';
 import ini from 'ini';
-/* eslint-enable */
 
 const extensions = {
   '.json': data => JSON.parse(data),
