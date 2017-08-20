@@ -5,7 +5,7 @@
 [![Test Coverage](https://codeclimate.com/github/aenglisc/project-lvl2-s117/badges/coverage.svg)](https://codeclimate.com/github/aenglisc/project-lvl2-s117/coverage)
 [![Build Status](https://travis-ci.org/aenglisc/project-lvl2-s117.svg?branch=master)](https://travis-ci.org/aenglisc/project-lvl2-s117)
 
-Allows you to check two configuration files for differences.
+Allows you to check two configuration files (.json, .yml, .ini) for differences.
 
 <table style="width:100%">
   <tr>
