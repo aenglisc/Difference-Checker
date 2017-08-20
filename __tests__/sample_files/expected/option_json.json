@@ -1,86 +1,160 @@
-{
- "host": {
-  "type": "unchanged",
-  "oldValue": "hexlet.io"
- },
- "timeout": {
-  "type": "changed",
-  "oldValue": 50,
-  "newValue": 20
- },
- "proxy": {
-  "type": "removed",
-  "oldValue": "123.234.53.22"
- },
- "common": {
-  "setting1": {
-   "type": "unchanged",
-   "oldValue": "Value 1"
-  },
-  "setting3": {
-   "type": "unchanged",
-   "oldValue": true
-  },
-  "setting4": {
-   "type": "removed",
-   "oldValue": "blah blah"
-  },
-  "setting5": {
-   "type": "removed",
-   "oldValue": {
-    "key5": "value5"
-   }
-  },
-  "sites": {
-   "a": {
+[
+  {
+    "key": "host",
     "type": "unchanged",
-    "oldValue": 1
-   },
-   "port": {
-    "type": "unchanged",
-    "oldValue": 8080
-   },
-   "base": {
-    "type": "created",
+    "oldValue": "hexlet.io",
     "newValue": "hexlet.io"
-   }
   },
-  "setting2": {
-   "type": "created",
-   "newValue": 200
+  {
+    "key": "timeout",
+    "type": "changed",
+    "oldValue": 50,
+    "newValue": 20
   },
-  "setting6": {
-   "type": "created",
-   "newValue": {
-    "key": "value"
-   }
-  }
- },
- "group1": {
-  "foo": {
-   "type": "unchanged",
-   "oldValue": "bar"
+  {
+    "key": "proxy",
+    "type": "removed",
+    "oldValue": "123.234.53.22"
   },
-  "baz": {
-   "type": "changed",
-   "oldValue": "bars",
-   "newValue": "bas"
+  {
+    "key": "common",
+    "oldValue": {
+      "setting1": "Value 1",
+      "setting3": true,
+      "setting4": "blah blah",
+      "setting5": {
+        "key5": "value5"
+      },
+      "sites": {
+        "a": 1,
+        "port": 8080
+      }
+    },
+    "newValue": {
+      "setting1": "Value 1",
+      "setting2": 200,
+      "setting3": true,
+      "setting6": {
+        "key": "value"
+      },
+      "sites": {
+        "a": 1,
+        "base": "hexlet.io",
+        "port": 8080
+      }
+    },
+    "children": [
+      {
+        "key": "setting1",
+        "type": "unchanged",
+        "oldValue": "Value 1",
+        "newValue": "Value 1"
+      },
+      {
+        "key": "setting3",
+        "type": "unchanged",
+        "oldValue": true,
+        "newValue": true
+      },
+      {
+        "key": "setting4",
+        "type": "removed",
+        "oldValue": "blah blah"
+      },
+      {
+        "key": "setting5",
+        "type": "removed",
+        "oldValue": {
+          "key5": "value5"
+        }
+      },
+      {
+        "key": "sites",
+        "oldValue": {
+          "a": 1,
+          "port": 8080
+        },
+        "newValue": {
+          "a": 1,
+          "base": "hexlet.io",
+          "port": 8080
+        },
+        "children": [
+          {
+            "key": "a",
+            "type": "unchanged",
+            "oldValue": 1,
+            "newValue": 1
+          },
+          {
+            "key": "port",
+            "type": "unchanged",
+            "oldValue": 8080,
+            "newValue": 8080
+          },
+          {
+            "key": "base",
+            "type": "created",
+            "newValue": "hexlet.io"
+          }
+        ]
+      },
+      {
+        "key": "setting2",
+        "type": "created",
+        "newValue": 200
+      },
+      {
+        "key": "setting6",
+        "type": "created",
+        "newValue": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  {
+    "key": "group1",
+    "oldValue": {
+      "foo": "bar",
+      "baz": "bars"
+    },
+    "newValue": {
+      "baz": "bas",
+      "foo": "bar"
+    },
+    "children": [
+      {
+        "key": "foo",
+        "type": "unchanged",
+        "oldValue": "bar",
+        "newValue": "bar"
+      },
+      {
+        "key": "baz",
+        "type": "changed",
+        "oldValue": "bars",
+        "newValue": "bas"
+      }
+    ]
+  },
+  {
+    "key": "group3",
+    "type": "removed",
+    "oldValue": {
+      "fee": "100500"
+    }
+  },
+  {
+    "key": "verbose",
+    "type": "created",
+    "newValue": true
+  },
+  {
+    "key": "group2",
+    "type": "created",
+    "newValue": {
+      "abc": "12345"
+    }
   }
- },
- "group3": {
-  "type": "removed",
-  "oldValue": {
-   "fee": "100500"
-  }
- },
- "verbose": {
-  "type": "created",
-  "newValue": true
- },
- "group2": {
-  "type": "created",
-  "newValue": {
-   "abc": "12345"
-  }
- }
-}
+]
