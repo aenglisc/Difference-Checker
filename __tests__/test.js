@@ -96,7 +96,7 @@ describe('Config differences', () => {
   });
 
   // json option tests
-  const expectedDiffJSON = fs.readFileSync(`${basePath}expected/option_json.txt`, 'utf8');
+  const expectedDiffJSON = fs.readFileSync(`${basePath}expected/option_json.json`, 'utf8');
 
   const samplesPathJSON = `${basePath}option_json/`;
 
