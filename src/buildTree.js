@@ -1,27 +1,33 @@
 import _ from 'lodash';
 
+const getType = (key, oldObj, newObj) => {
+  const bothExist = (key in oldObj) && (key in newObj);
+  const bothHaveChildren = _.isObject(oldObj[key]) && _.isObject(newObj[key]);
+  const notInOld = !(key in oldObj);
+  const notInNew = !(key in newObj);
+  const equalValues = oldObj[key] === newObj[key];
+
+  if (notInOld) {
+    return 'created';
+  }
+  if (notInNew) {
+    return 'removed';
+  }
+  if (bothHaveChildren) {
+    return 'nested';
+  }
+  return (bothExist && equalValues) ? 'unchanged' : 'changed';
+};
+
 const buildTree = (oldObj, newObj) => {
   const oldKeys = Object.keys(oldObj);
   const newKeys = Object.keys(newObj);
   const allKeys = _.union(oldKeys, newKeys);
 
-  const getType = (key) => {
-    const bothExist = (oldKeys.includes(key) && newKeys.includes(key));
-    const bothHaveChildren = _.isObject(oldObj[key]) && _.isObject(newObj[key]);
-    const notInOld = !oldKeys.includes(key);
-    const notInNew = !newKeys.includes(key);
-    const equalValues = oldObj[key] === newObj[key];
-
-    if (notInOld) { return 'created'; }
-    if (notInNew) { return 'removed'; }
-    if (bothHaveChildren) { return 'nested'; }
-    return bothExist && equalValues ? 'unchanged' : 'changed';
-  };
-
   const buildNode = (key) => {
-    const type = getType(key);
-    const oldValue = oldObj === undefined ? undefined : oldObj[key];
-    const newValue = newObj === undefined ? undefined : newObj[key];
+    const type = getType(key, oldObj, newObj);
+    const oldValue = oldObj[key];
+    const newValue = newObj[key];
     const children = type === 'nested' ? buildTree(oldValue, newValue) : [];
 
     const node = { key, type, oldValue, newValue, children };
