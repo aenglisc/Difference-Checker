@@ -9,8 +9,8 @@ Allows you to check two configuration files for differences.
 
 <table style="width:100%">
   <tr>
-    <th>Output</th>
-    <th>Description</th>
+    <th>Option</th>
+    <th>Format</th>
   </tr>
   <tr>
     <td>default</td>
