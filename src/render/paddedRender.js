@@ -1,4 +1,4 @@
-import isObject from './utils';
+import _ from 'lodash';
 
 const same = '    ';
 const removed = '  - ';
@@ -7,27 +7,28 @@ const created = '  + ';
 // for children indentation purposes
 const indent = same;
 
-const paddedRender = (tree, baseIndent = '') => `{\n${tree.reduce((acc, node) => {
-  const line = (lineStatus, value) => `${baseIndent}${lineStatus}${node.key}: ${value}\n`;
-
-  if (node.hasChildren) {
-    return `${acc}${line(same, paddedRender(node.values, baseIndent + indent))}`;
-  }
-
-  const renderObjectValue = (values, valuesBaseIndent = baseIndent + indent) => {
-    const valuesString = Object.keys(values).reduce((valuesAcc, key) => {
-      const value = isObject(values[key]) ?
-        renderObjectValue(values[key], valuesBaseIndent + indent) : values[key];
-
-      return `${valuesAcc}${valuesBaseIndent + indent}${key}: ${value}\n`;
+const renderValue = (value, depth) => {
+  const renderObject = (object) => {
+    const objString = Object.keys(object).reduce((acc, key) => {
+      const newDepth = depth + 1;
+      const objValue = renderValue(object[key], newDepth);
+      return `${acc}${indent.repeat(newDepth)}${key}: ${objValue}\n`;
     }, '');
-    return `{\n${valuesString}${valuesBaseIndent}}`;
+    return `{\n${objString}${indent.repeat(depth)}}`;
   };
 
-  const oldValue = isObject(node.oldValue) ? renderObjectValue(node.oldValue) : node.oldValue;
-  const newValue = isObject(node.newValue) ? renderObjectValue(node.newValue) : node.newValue;
+  return _.isObject(value) ? renderObject(value) : value;
+};
 
-  switch (node.status) {
+const paddedRender = (tree, depth = 0) => `{\n${tree.reduce((acc, node) => {
+  const line = (lineStatus, value) => `${indent.repeat(depth)}${lineStatus}${node.key}: ${value}\n`;
+  const oldValue = renderValue(node.oldValue, depth + 1);
+  const newValue = renderValue(node.newValue, depth + 1);
+
+  switch (node.type) {
+
+    case 'nested':
+      return `${acc}${line(same, paddedRender(node.children, depth + 1))}`;
 
     case 'unchanged':
       return `${acc}${line(same, oldValue)}`;
@@ -44,6 +45,6 @@ const paddedRender = (tree, baseIndent = '') => `{\n${tree.reduce((acc, node) =>
     default:
       return acc;
   }
-}, '')}${baseIndent}}`;
+}, '')}${indent.repeat(depth)}}`;
 
 export default tree => paddedRender(tree);
