@@ -50,8 +50,9 @@ const defaultRender = (tree, baseIndent = '') => {
 };
 
 const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
+  console.log(acc);
   if (node.hasChildren) {
-    return `${acc}${plainRender(node.values, `${parentNode}${node.key}.`)}\n`;
+    return `${acc}${plainRender(node.values, `${parentNode}${node.key}.`)}`;
   }
 
   const baseString = `${acc}Property '${parentNode}${node.key}' was `;
@@ -76,7 +77,7 @@ const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
     default:
       return acc;
   }
-}, '').trim();
+}, '');
 /*
 const jsonRender = tree => {
   return tree.reduce((acc, node) => {
@@ -86,7 +87,7 @@ const jsonRender = tree => {
 */
 const formats = {
   default: tree => defaultRender(tree),
-  plain: tree => plainRender(tree),
+  plain: tree => plainRender(tree).trim(),
 //  json: tree => jsonRender(tree),
 };
 
