@@ -94,7 +94,7 @@ describe('Config differences', () => {
   it('Nested JSON/JSON Plain', () => {
     expect(gendiff(oldPlain, newPlain, 'plain')).toBe(expectedDiffPlain);
   });
-
+/*
   // json option tests
   const expectedDiffJSON = fs.readFileSync(`${basePath}expected/option_json.txt`, 'utf8');
 
@@ -105,5 +105,5 @@ describe('Config differences', () => {
 
   it('Nested JSON/JSON JSON', () => {
     expect(gendiff(oldJSON, newJSON, 'json')).toBe(expectedDiffJSON);
-  });
+  });*/
 });
