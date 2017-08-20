@@ -6,7 +6,7 @@ import gendiff from '..';
 program
   .version(packageData.version)
   .description(packageData.description)
-  .option('-f, --format [type]', 'output format')
+  .option('-f, --format [type]', 'output format, available as plain or json')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig) => {
     console.log(gendiff(firstConfig, secondConfig, program.format));
