@@ -15,13 +15,14 @@ const defaultRender = (tree, baseIndent = '') => {
       return `${acc}${line(same, defaultRender(node.values, baseIndent + indent))}`;
     }
 
-    const renderObjectValue = (values) => {
+    const renderObjectValue = (values, valuesBaseIndent = baseIndent + indent) => {
       const valuesString = Object.keys(values).reduce((valuesAcc, key) => {
-        const valuesBaseIndent = baseIndent + indent;
+        const value = isObject(values[key]) ?
+          renderObjectValue(values[key], valuesBaseIndent + indent) : values[key];
 
-        return `${valuesAcc}${valuesBaseIndent + indent}${key}: ${values[key]}\n`;
+        return `${valuesAcc}${valuesBaseIndent + indent}${key}: ${value}\n`;
       }, '');
-      return `{\n${valuesString}${baseIndent + indent}}`;
+      return `{\n${valuesString}${valuesBaseIndent}}`;
     };
 
     const oldValue = isObject(node.oldValue) ? renderObjectValue(node.oldValue) : node.oldValue;
@@ -50,7 +51,7 @@ const defaultRender = (tree, baseIndent = '') => {
 
 const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
   if (node.hasChildren) {
-    return `${acc}${plainRender(node.values, `${parentNode}${node.key}.`)}\n`;
+    return `${acc}${plainRender(node.values, `${parentNode}${node.key}.`)}`;
   }
 
   const baseString = `${acc}Property '${parentNode}${node.key}' was `;
@@ -73,13 +74,20 @@ const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
       return `${baseString}updated. From '${node.oldValue}' to '${node.newValue}'\n`;
 
     default:
-      return acc;
+      return acc + '\n';
   }
 }, '').trim();
+
+const jsonRender = tree => {
+  return tree.reduce((acc, node) => {
+    return `${acc}\n${node}`;
+  }, '');
+};
 
 const formats = {
   default: tree => defaultRender(tree),
   plain: tree => plainRender(tree),
+  json: tree => jsonRender(tree),
 };
 
 export default (treeObject) => {
