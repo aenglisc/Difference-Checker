@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import parseFile from './parseFile';
-
 import buildTree from './buildTree';
 import renderTree from './render';
 
