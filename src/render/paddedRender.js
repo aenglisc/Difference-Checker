@@ -1,50 +1,53 @@
 import _ from 'lodash';
 
+// node status markers
 const same = '    ';
 const removed = '  - ';
 const created = '  + ';
 
 // for children indentation purposes
-const indent = same;
+const indent = '    ';
 
 const renderValue = (value, depth) => {
-  const renderObject = (object) => {
-    const objString = Object.keys(object).reduce((acc, key) => {
-      const newDepth = depth + 1;
-      const objValue = renderValue(object[key], newDepth);
-      return `${acc}${indent.repeat(newDepth)}${key}: ${objValue}\n`;
-    }, '');
-    return `{\n${objString}${indent.repeat(depth)}}`;
-  };
-
-  return _.isObject(value) ? renderObject(value) : value;
+  if (_.isObject(value)) {
+    const json = JSON.stringify(value, null, '');
+    const objStr = json.slice(1, -1).replace(/["]+/g, '').replace(/[:]/g, ': ');
+    return `{\n${indent.repeat(depth + 1)}${objStr}\n${indent.repeat(depth)}}`;
+  }
+  return value;
 };
 
+const line = (status, value, key, depth) => `${indent.repeat(depth)}${status}${key}: ${value}\n`;
+
 const paddedRender = (tree, depth = 0) => `{\n${tree.reduce((acc, node) => {
-  const line = (lineStatus, value) => `${indent.repeat(depth)}${lineStatus}${node.key}: ${value}\n`;
   const oldValue = renderValue(node.oldValue, depth + 1);
   const newValue = renderValue(node.newValue, depth + 1);
+
+  const nested = line(same, paddedRender(node.children, depth + 1), node.key, depth);
+  const sameLine = line(same, oldValue, node.key, depth);
+  const oldLine = line(removed, oldValue, node.key, depth);
+  const newLine = line(created, newValue, node.key, depth);
 
   switch (node.type) {
 
     case 'nested':
-      return `${acc}${line(same, paddedRender(node.children, depth + 1))}`;
+      return `${acc}${nested}`;
 
     case 'unchanged':
-      return `${acc}${line(same, oldValue)}`;
+      return `${acc}${sameLine}`;
 
     case 'created':
-      return `${acc}${line(created, newValue)}`;
+      return `${acc}${newLine}`;
 
     case 'removed':
-      return `${acc}${line(removed, oldValue)}`;
+      return `${acc}${oldLine}`;
 
     case 'changed':
-      return `${acc}${line(created, newValue)}${line(removed, oldValue)}`;
+      return `${acc}${newLine}${oldLine}`;
 
     default:
       return acc;
   }
 }, '')}${indent.repeat(depth)}}`;
 
-export default tree => paddedRender(tree);
+export default ast => paddedRender(ast);
