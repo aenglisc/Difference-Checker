@@ -1,29 +1,22 @@
 const jsonRender = tree => tree.reduce((acc, node) => {
-  const { key, values, oldValue, newValue, status } = node;
+  const { key, type, oldValue, newValue, children } = node;
 
-  if (node.hasChildren) {
-    acc[key] = jsonRender(values);
-    return acc;
-  }
+  switch (type) {
 
-  switch (status) {
+    case 'nested':
+      return { ...acc, [key]: jsonRender(children) };
 
     case 'created':
-      acc[`+${key}`] = { newValue };
-      return acc;
+      return { ...acc, [key]: { type, newValue } };
 
     case 'removed':
-      acc[`-${key}`] = { oldValue };
-      return acc;
+      return { ...acc, [key]: { type, oldValue } };
 
     case 'changed':
-      acc[`+${key}`] = { newValue };
-      acc[`-${key}`] = { oldValue };
-      return acc;
+      return { ...acc, [key]: { type, oldValue, newValue } };
 
     case 'unchanged':
-      acc[key] = { oldValue };
-      return acc;
+      return { ...acc, [key]: { type, oldValue } };
 
     default:
       return acc;

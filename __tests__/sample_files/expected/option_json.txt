@@ -1,46 +1,56 @@
 {
  "host": {
+  "type": "unchanged",
   "oldValue": "hexlet.io"
  },
- "+timeout": {
+ "timeout": {
+  "type": "changed",
+  "oldValue": 50,
   "newValue": 20
  },
- "-timeout": {
-  "oldValue": 50
- },
- "-proxy": {
+ "proxy": {
+  "type": "removed",
   "oldValue": "123.234.53.22"
  },
  "common": {
   "setting1": {
+   "type": "unchanged",
    "oldValue": "Value 1"
   },
   "setting3": {
+   "type": "unchanged",
    "oldValue": true
   },
-  "-setting4": {
+  "setting4": {
+   "type": "removed",
    "oldValue": "blah blah"
   },
-  "-setting5": {
+  "setting5": {
+   "type": "removed",
    "oldValue": {
     "key5": "value5"
    }
   },
   "sites": {
    "a": {
+    "type": "unchanged",
     "oldValue": 1
    },
    "port": {
+    "type": "unchanged",
     "oldValue": 8080
    },
-   "+base": {
+   "base": {
+    "type": "created",
     "newValue": "hexlet.io"
    }
   },
-  "+setting2": {
+  "setting2": {
+   "type": "created",
    "newValue": 200
   },
-  "+setting6": {
+  "setting6": {
+   "type": "created",
    "newValue": {
     "key": "value"
    }
@@ -48,24 +58,27 @@
  },
  "group1": {
   "foo": {
+   "type": "unchanged",
    "oldValue": "bar"
   },
-  "+baz": {
+  "baz": {
+   "type": "changed",
+   "oldValue": "bars",
    "newValue": "bas"
-  },
-  "-baz": {
-   "oldValue": "bars"
   }
  },
- "-group3": {
+ "group3": {
+  "type": "removed",
   "oldValue": {
    "fee": "100500"
   }
  },
- "+verbose": {
+ "verbose": {
+  "type": "created",
   "newValue": true
  },
- "+group2": {
+ "group2": {
+  "type": "created",
   "newValue": {
    "abc": "12345"
   }
