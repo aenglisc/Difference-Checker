@@ -1,3 +1,73 @@
-1212121
-1212212
-12122121
+{
+ "host": {
+  "oldValue": "hexlet.io"
+ },
+ "+timeout": {
+  "newValue": 20
+ },
+ "-timeout": {
+  "oldValue": 50
+ },
+ "-proxy": {
+  "oldValue": "123.234.53.22"
+ },
+ "common": {
+  "setting1": {
+   "oldValue": "Value 1"
+  },
+  "setting3": {
+   "oldValue": true
+  },
+  "-setting4": {
+   "oldValue": "blah blah"
+  },
+  "-setting5": {
+   "oldValue": {
+    "key5": "value5"
+   }
+  },
+  "sites": {
+   "a": {
+    "oldValue": 1
+   },
+   "port": {
+    "oldValue": 8080
+   },
+   "+base": {
+    "newValue": "hexlet.io"
+   }
+  },
+  "+setting2": {
+   "newValue": 200
+  },
+  "+setting6": {
+   "newValue": {
+    "key": "value"
+   }
+  }
+ },
+ "group1": {
+  "foo": {
+   "oldValue": "bar"
+  },
+  "+baz": {
+   "newValue": "bas"
+  },
+  "-baz": {
+   "oldValue": "bars"
+  }
+ },
+ "-group3": {
+  "oldValue": {
+   "fee": "100500"
+  }
+ },
+ "+verbose": {
+  "newValue": true
+ },
+ "+group2": {
+  "newValue": {
+   "abc": "12345"
+  }
+ }
+}
