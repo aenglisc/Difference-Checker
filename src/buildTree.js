@@ -7,10 +7,15 @@ const buildTree = (oldObj, newObj) => {
 
   const getType = (key) => {
     const bothExist = (oldKeys.includes(key) && newKeys.includes(key));
-    if (_.isObject(oldObj[key]) && _.isObject(newObj[key])) { return 'nested'; }
-    if (!oldKeys.includes(key)) { return 'created'; }
-    if (!newKeys.includes(key)) { return 'removed'; }
-    return bothExist && oldObj[key] === newObj[key] ? 'unchanged' : 'changed';
+    const bothHaveChildren = _.isObject(oldObj[key]) && _.isObject(newObj[key]);
+    const notInOld = !oldKeys.includes(key);
+    const notInNew = !newKeys.includes(key);
+    const equalValues = oldObj[key] === newObj[key];
+
+    if (notInOld) { return 'created'; }
+    if (notInNew) { return 'removed'; }
+    if (bothHaveChildren) { return 'nested'; }
+    return bothExist && equalValues ? 'unchanged' : 'changed';
   };
 
   const buildNode = (key) => {
@@ -19,11 +24,11 @@ const buildTree = (oldObj, newObj) => {
     const newValue = newObj === undefined ? undefined : newObj[key];
     const children = type === 'nested' ? buildTree(oldValue, newValue) : [];
 
-    return { key, type, oldValue, newValue, children };
+    const node = { key, type, oldValue, newValue, children };
+    return node;
   };
 
   const tree = allKeys.map(buildNode);
-
   return tree;
 };
 
