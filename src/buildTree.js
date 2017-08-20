@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import _ from 'lodash';
 
 const buildTree = (oldObj, newObj) => {

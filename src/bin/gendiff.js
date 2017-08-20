@@ -1,4 +1,5 @@
 #!/usr/local/bin/node
+// eslint-disable-next-line
 import program from 'commander';
 import packageData from '../../package.json';
 import gendiff from '..';
