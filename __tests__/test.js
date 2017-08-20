@@ -105,5 +105,6 @@ describe('Config differences', () => {
 
   it('Nested JSON/JSON JSON', () => {
     expect(gendiff(oldJSON, newJSON, 'json')).toBe(expectedDiffJSON);
-  });*/
+  });
+*/
 });
