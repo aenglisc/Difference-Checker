@@ -50,7 +50,6 @@ const defaultRender = (tree, baseIndent = '') => {
 };
 
 const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
-  console.log(acc);
   if (node.hasChildren) {
     return `${acc}${plainRender(node.values, `${parentNode}${node.key}.`)}`;
   }

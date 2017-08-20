@@ -11,6 +11,14 @@ build:
 publish:
 	npm publish
 
+g:
+	rm -rf dist
+	npm run build
+	npm install -g
+
+ung:
+	npm uninstall -g
+
 lint:
 	npm run eslint .
 
