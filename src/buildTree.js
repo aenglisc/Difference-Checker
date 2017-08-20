@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import _ from 'lodash';
 
 const buildTree = (oldObj, newObj) => {
@@ -6,22 +5,21 @@ const buildTree = (oldObj, newObj) => {
   const newKeys = Object.keys(newObj);
   const allKeys = _.union(oldKeys, newKeys);
 
-  const getStatus = (key) => {
+  const getType = (key) => {
     const bothExist = (oldKeys.includes(key) && newKeys.includes(key));
+    if (_.isObject(oldObj[key]) && _.isObject(newObj[key])) { return 'nested'; }
     if (!oldKeys.includes(key)) { return 'created'; }
     if (!newKeys.includes(key)) { return 'removed'; }
     return bothExist && oldObj[key] === newObj[key] ? 'unchanged' : 'changed';
   };
 
   const buildNode = (key) => {
+    const type = getType(key);
     const oldValue = oldObj === undefined ? undefined : oldObj[key];
     const newValue = newObj === undefined ? undefined : newObj[key];
+    const children = type === 'nested' ? buildTree(oldValue, newValue) : [];
 
-    const hasChildren = (oldValue instanceof Object) && (newValue instanceof Object);
-
-    return hasChildren ?
-           { key, hasChildren, values: buildTree(oldValue, newValue) } :
-           { key, hasChildren, oldValue, newValue, status: getStatus(key) };
+    return { key, type, oldValue, newValue, children };
   };
 
   const tree = allKeys.map(buildNode);
