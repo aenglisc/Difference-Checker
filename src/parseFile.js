@@ -9,8 +9,9 @@ const extensions = {
 };
 
 export default (fileObject) => {
-  if (fileObject.extension in extensions) {
-    return extensions[fileObject.extension](fileObject.data);
+  const { extension, data } = fileObject;
+  if (extension in extensions) {
+    return extensions[extension](data);
   }
-  throw new Error(`${fileObject.extension} files are not supported`);
+  throw new Error(`${extension} files are not supported`);
 };

@@ -9,8 +9,9 @@ const formats = {
 };
 
 export default (treeObject) => {
-  if (treeObject.format in formats) {
-    return formats[treeObject.format](treeObject.tree);
+  const { format, tree } = treeObject;
+  if (format in formats) {
+    return formats[format](tree);
   }
-  throw new Error(`${treeObject.format} is not a proper format`);
+  throw new Error(`${format} is not a proper format`);
 };
