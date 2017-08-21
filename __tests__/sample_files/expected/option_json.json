@@ -2,8 +2,7 @@
   {
     "key": "host",
     "type": "unchanged",
-    "oldValue": "hexlet.io",
-    "newValue": "hexlet.io"
+    "oldValue": "hexlet.io"
   },
   {
     "key": "timeout",
@@ -18,43 +17,16 @@
   },
   {
     "key": "common",
-    "oldValue": {
-      "setting1": "Value 1",
-      "setting3": true,
-      "setting4": "blah blah",
-      "setting5": {
-        "key5": "value5"
-      },
-      "sites": {
-        "a": 1,
-        "port": 8080
-      }
-    },
-    "newValue": {
-      "setting1": "Value 1",
-      "setting2": 200,
-      "setting3": true,
-      "setting6": {
-        "key": "value"
-      },
-      "sites": {
-        "a": 1,
-        "base": "hexlet.io",
-        "port": 8080
-      }
-    },
     "children": [
       {
         "key": "setting1",
         "type": "unchanged",
-        "oldValue": "Value 1",
-        "newValue": "Value 1"
+        "oldValue": "Value 1"
       },
       {
         "key": "setting3",
         "type": "unchanged",
-        "oldValue": true,
-        "newValue": true
+        "oldValue": true
       },
       {
         "key": "setting4",
@@ -70,27 +42,16 @@
       },
       {
         "key": "sites",
-        "oldValue": {
-          "a": 1,
-          "port": 8080
-        },
-        "newValue": {
-          "a": 1,
-          "base": "hexlet.io",
-          "port": 8080
-        },
         "children": [
           {
             "key": "a",
             "type": "unchanged",
-            "oldValue": 1,
-            "newValue": 1
+            "oldValue": 1
           },
           {
             "key": "port",
             "type": "unchanged",
-            "oldValue": 8080,
-            "newValue": 8080
+            "oldValue": 8080
           },
           {
             "key": "base",
@@ -115,20 +76,11 @@
   },
   {
     "key": "group1",
-    "oldValue": {
-      "foo": "bar",
-      "baz": "bars"
-    },
-    "newValue": {
-      "baz": "bas",
-      "foo": "bar"
-    },
     "children": [
       {
         "key": "foo",
         "type": "unchanged",
-        "oldValue": "bar",
-        "newValue": "bar"
+        "oldValue": "bar"
       },
       {
         "key": "baz",
