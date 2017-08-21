@@ -1,4 +1,4 @@
-# project-lvl2-s117
+# Difference Checker
 
 [![Code Climate](https://codeclimate.com/github/aenglisc/project-lvl2-s117/badges/gpa.svg)](https://codeclimate.com/github/aenglisc/project-lvl2-s117)
 [![Issue Count](https://codeclimate.com/github/aenglisc/project-lvl2-s117/badges/issue_count.svg)](https://codeclimate.com/github/aenglisc/project-lvl2-s117)
