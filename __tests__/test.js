@@ -22,7 +22,13 @@ describe('Config differences', () => {
   it('Invalid extensions and format', () => {
     const oldErrorFilePath = `${basePath}erroneous/error.kek`;
     const newErrorFilepath = `${basePath}erroneous/error.lul`;
-    const e = '.kek files are not supported\n.lul files are not supported\nee is not a valid format';
+
+    const kek = '.kek files are not supported';
+    const lul = '.lul files are not supported';
+    const ee = 'ee is not a valid format';
+
+    const e = `${kek}\n${lul}\n${ee}`;
+
     expect(gendiff(oldErrorFilePath, newErrorFilepath, 'ee')).toBe(e);
   });
 
@@ -95,7 +101,7 @@ describe('Config differences', () => {
   const oldPlain = `${samplesPathPlain}before.json`;
   const newPlain = `${samplesPathPlain}after.json`;
 
-  it('Nested JSON/JSON Plain', () => {
+  it('Nested JSON/JSON -f plain', () => {
     expect(gendiff(oldPlain, newPlain, 'plain')).toBe(expectedDiffPlain);
   });
 
@@ -107,7 +113,7 @@ describe('Config differences', () => {
   const oldJSON = `${samplesPathJSON}before.json`;
   const newJSON = `${samplesPathJSON}after.json`;
 
-  it('Nested JSON/JSON JSON', () => {
+  it('Nested JSON/JSON -f json', () => {
     expect(gendiff(oldJSON, newJSON, 'json')).toBe(expectedDiffJSON);
   });
 });

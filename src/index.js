@@ -22,11 +22,11 @@ export default (oldFilePath, newFilePath, format = 'padded') => {
   if (!fs.existsSync(oldFilePath)) {
     errors.push(`${oldFilePath} does not exist`);
   }
-  if (!(oldFileExt in extensions)) {
-    errors.push(`${oldFileExt} files are not supported`);
-  }
   if (!fs.existsSync(newFilePath)) {
     errors.push(`${newFilePath} does not exist`);
+  }
+  if (!(oldFileExt in extensions)) {
+    errors.push(`${oldFileExt} files are not supported`);
   }
   if (oldFileExt !== newFileExt && !(newFileExt in extensions)) {
     errors.push(`${newFileExt} files are not supported`);
