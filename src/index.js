@@ -18,6 +18,7 @@ export default (oldFilePath, newFilePath, format = 'padded') => {
   const oldFileExt = path.extname(oldFilePath, 'utf8');
   const newFileExt = path.extname(newFilePath, 'utf8');
   const errors = [];
+
   if (!fs.existsSync(oldFilePath)) {
     errors.push(`${oldFilePath} does not exist`);
   }
