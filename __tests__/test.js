@@ -2,30 +2,59 @@ import fs from 'fs';
 import gendiff from '../src';
 
 describe('Config differences', () => {
-  // wrong extension throws an error
+  const basePath = './__tests__/sample_files/';
+  const samplesPathFlat = `${basePath}flat/`;
+  const samplesPathNested = `${basePath}nested/`;
+
+  // wrong extension returns an error
   it('Invalid extension', () => {
-    const errorFile = './__tests__/sample_files/erroneous/error.txt';
-    expect(gendiff(errorFile, errorFile)).toBe('.txt files are not supported');
+    const extErrorFilePath = `${basePath}erroneous/error.txt`;
+    expect(gendiff(extErrorFilePath, extErrorFilePath)).toBe('.txt files are not supported');
   });
 
-  const basePath = './__tests__/sample_files/';
+  // wrong format returns an error
+  it('Invalid format', () => {
+    const formatErrorFile = `${samplesPathFlat}json/before.json`;
+    expect(gendiff(formatErrorFile, formatErrorFile, 'ee')).toBe('ee is not a valid format');
+  });
+
+  // wrong extensions and format returns an error
+  it('Invalid extensions and format', () => {
+    const oldErrorFilePath = `${basePath}erroneous/error.kek`;
+    const newErrorFilepath = `${basePath}erroneous/error.lul`;
+    const e = '.kek files are not supported\n.lul files are not supported\nee is not a valid format';
+    expect(gendiff(oldErrorFilePath, newErrorFilepath, 'ee')).toBe(e);
+  });
+
+  // non-existent files return an error
+  it('File does not exist', () => {
+    const pathExists = `${samplesPathFlat}json/before.json`;
+    const pathDoesNotExist = `${basePath}erroneous/nosuchfile.json`;
+    const e = `${pathDoesNotExist} does not exist`;
+    expect(gendiff(pathExists, pathDoesNotExist)).toBe(e);
+  });
 
   // flat tests
   const expectedDiffFlat = fs.readFileSync(`${basePath}expected/flat.txt`, 'utf8');
 
-  const samplesPathFlat = `${basePath}flat/`;
-
   const oldJSONFlat = `${samplesPathFlat}json/before.json`;
   const newJSONFlat = `${samplesPathFlat}json/after.json`;
 
-  const oldYAMLFlat = `${samplesPathFlat}yaml/before.yml`;
-  const newYAMLFlat = `${samplesPathFlat}yaml/after.yml`;
+  const oldYMLFlat = `${samplesPathFlat}yaml/before.yml`;
+  const newYMLFlat = `${samplesPathFlat}yaml/after.yml`;
+
+  const oldYAMLFlat = `${samplesPathFlat}yaml/before.yaml`;
+  const newYAMLFlat = `${samplesPathFlat}yaml/after.yaml`;
 
   const oldINIFlat = `${samplesPathFlat}ini/before.ini`;
   const newINIFlat = `${samplesPathFlat}ini/after.ini`;
 
   it('Flat JSON/JSON', () => {
     expect(gendiff(oldJSONFlat, newJSONFlat)).toBe(expectedDiffFlat);
+  });
+
+  it('Flat YML/YML', () => {
+    expect(gendiff(oldYMLFlat, newYMLFlat)).toBe(expectedDiffFlat);
   });
 
   it('Flat YAML/YAML', () => {
@@ -36,46 +65,26 @@ describe('Config differences', () => {
     expect(gendiff(oldINIFlat, newINIFlat)).toBe(expectedDiffFlat);
   });
 
-  it('Flat YAML/JSON', () => {
-    expect(gendiff(oldYAMLFlat, newJSONFlat)).toBe(expectedDiffFlat);
+  it('Flat YML/JSON', () => {
+    expect(gendiff(oldYMLFlat, newJSONFlat)).toBe(expectedDiffFlat);
   });
 
   it('Flat INI/JSON', () => {
     expect(gendiff(oldINIFlat, newJSONFlat)).toBe(expectedDiffFlat);
   });
 
+  it('Flat INI/YML', () => {
+    expect(gendiff(oldINIFlat, newYMLFlat)).toBe(expectedDiffFlat);
+  });
+
   // nested tests
   const expectedDiffNested = fs.readFileSync(`${basePath}expected/nested.txt`, 'utf8');
-
-  const samplesPathNested = `${basePath}nested/`;
 
   const oldJSONNested = `${samplesPathNested}json/before.json`;
   const newJSONNested = `${samplesPathNested}json/after.json`;
 
-  const oldYAMLNested = `${samplesPathNested}yaml/before.yml`;
-  const newYAMLNested = `${samplesPathNested}yaml/after.yml`;
-
-  const oldININested = `${samplesPathNested}ini/before.ini`;
-  const newININested = `${samplesPathNested}ini/after.ini`;
-
   it('Nested JSON/JSON', () => {
     expect(gendiff(oldJSONNested, newJSONNested)).toBe(expectedDiffNested);
-  });
-
-  it('Nested YAML/YAML', () => {
-    expect(gendiff(oldYAMLNested, newYAMLNested)).toBe(expectedDiffNested);
-  });
-
-  it('Nested INI/INI', () => {
-    expect(gendiff(oldININested, newININested)).toBe(expectedDiffNested);
-  });
-
-  it('Nested YAML/JSON', () => {
-    expect(gendiff(oldYAMLNested, newJSONNested)).toBe(expectedDiffNested);
-  });
-
-  it('Nested INI/JSON', () => {
-    expect(gendiff(oldININested, newJSONNested)).toBe(expectedDiffNested);
   });
 
   // plain option tests
@@ -85,11 +94,6 @@ describe('Config differences', () => {
 
   const oldPlain = `${samplesPathPlain}before.json`;
   const newPlain = `${samplesPathPlain}after.json`;
-
-  // wrong format throws an error
-  it('Invalid format', () => {
-    expect(gendiff(oldPlain, newPlain, 'ee')).toBe('ee is not a proper format');
-  });
 
   it('Nested JSON/JSON Plain', () => {
     expect(gendiff(oldPlain, newPlain, 'plain')).toBe(expectedDiffPlain);

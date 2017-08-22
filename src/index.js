@@ -14,27 +14,28 @@ const getConfigObject = (filePath, extension) => {
   return configObject;
 };
 
-const getErrors = (oldFileExt, newFileExt, format) => {
+export default (oldFilePath, newFilePath, format = 'padded') => {
+  const oldFileExt = path.extname(oldFilePath, 'utf8');
+  const newFileExt = path.extname(newFilePath, 'utf8');
   const errors = [];
+  if (!fs.existsSync(oldFilePath)) {
+    errors.push(`${oldFilePath} does not exist`);
+  }
   if (!(oldFileExt in extensions)) {
     errors.push(`${oldFileExt} files are not supported`);
+  }
+  if (!fs.existsSync(newFilePath)) {
+    errors.push(`${newFilePath} does not exist`);
   }
   if (oldFileExt !== newFileExt && !(newFileExt in extensions)) {
     errors.push(`${newFileExt} files are not supported`);
   }
   if (!(format in formats)) {
-    errors.push(`${format} is not a proper format`);
+    errors.push(`${format} is not a valid format`);
   }
-  return errors.length > 0 ? errors.join('\n') : null;
-};
 
-export default (oldFilePath, newFilePath, format = 'padded') => {
-  const oldFileExt = path.extname(oldFilePath, 'utf8');
-  const newFileExt = path.extname(newFilePath, 'utf8');
-  const errors = getErrors(oldFileExt, newFileExt, format);
-
-  if (errors) {
-    return errors;
+  if (errors.length > 0) {
+    return errors.join('\n');
   }
 
   const configObjects = {
