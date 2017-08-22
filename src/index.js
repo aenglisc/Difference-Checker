@@ -4,19 +4,17 @@ import parseFile, { extensions } from './parseFile';
 import renderTree, { formats } from './render';
 import buildTree from './buildTree';
 
-const getConfigObject = (filePath) => {
+const getConfigObject = (filePath, extension) => {
   const fileObject = {
     data: fs.readFileSync(filePath, 'utf8'),
-    extension: path.extname(filePath, 'utf8'),
+    extension,
   };
 
   const configObject = parseFile(fileObject);
   return configObject;
 };
 
-const getErrors = (oldFilePath, newFilePath, format) => {
-  const oldFileExt = path.extname(oldFilePath, 'utf8');
-  const newFileExt = path.extname(newFilePath, 'utf8');
+const getErrors = (oldFileExt, newFileExt, format) => {
 
   const errors = [];
   if (!(oldFileExt in extensions)) {
@@ -32,15 +30,17 @@ const getErrors = (oldFilePath, newFilePath, format) => {
 };
 
 export default (oldFilePath, newFilePath, format = 'padded') => {
-  const errors = getErrors(oldFilePath, newFilePath, format);
+  const oldFileExt = path.extname(oldFilePath, 'utf8');
+  const newFileExt = path.extname(newFilePath, 'utf8');
+  const errors = getErrors(oldFileExt, newFileExt, format);
 
   if (errors) {
     return errors;
   }
 
   const configObjects = {
-    old: getConfigObject(oldFilePath),
-    new: getConfigObject(newFilePath),
+    old: getConfigObject(oldFilePath, oldFileExt),
+    new: getConfigObject(newFilePath, newFileExt),
   };
 
   const treeObject = {
