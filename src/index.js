@@ -15,7 +15,6 @@ const getConfigObject = (filePath, extension) => {
 };
 
 const getErrors = (oldFileExt, newFileExt, format) => {
-
   const errors = [];
   if (!(oldFileExt in extensions)) {
     errors.push(`${oldFileExt} files are not supported`);
