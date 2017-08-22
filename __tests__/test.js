@@ -5,7 +5,7 @@ describe('Config differences', () => {
   // wrong extension throws an error
   it('Invalid extension', () => {
     const errorFile = './__tests__/sample_files/erroneous/error.txt';
-    expect(() => gendiff(errorFile, errorFile)).toThrow('.txt files are not supported');
+    expect(gendiff(errorFile, errorFile)).toBe('.txt files are not supported');
   });
 
   const basePath = './__tests__/sample_files/';
@@ -88,7 +88,7 @@ describe('Config differences', () => {
 
   // wrong format throws an error
   it('Invalid format', () => {
-    expect(() => gendiff(oldPlain, newPlain, 'ee')).toThrow('ee is not a proper format');
+    expect(gendiff(oldPlain, newPlain, 'ee')).toBe('ee is not a proper format');
   });
 
   it('Nested JSON/JSON Plain', () => {
