@@ -7,7 +7,7 @@ script: make lint test
 
 addons:
   code_climate:
-    repo_token: 0c817f31f4ae4661b2a08777bf36d0c693b27253067d45e9751dafb8c6cd6266
+    repo_token: d929716e703c5fc5f535a9b3f9c800611066d0a66c13bd11c5ad4a221f490db9
 
 after_success:
   - npm install -g istanbul
