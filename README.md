@@ -1,9 +1,9 @@
 # Difference Checker
 
-[![Code Climate](https://codeclimate.com/github/aenglisc/difference-checker/badges/gpa.svg)](https://codeclimate.com/github/difference-checker)
-[![Issue Count](https://codeclimate.com/github/aenglisc/difference-checker/badges/issue_count.svg)](https://codeclimate.com/github/aenglisc/difference-checker)
-[![Test Coverage](https://codeclimate.com/github/aenglisc/difference-checker/badges/coverage.svg)](https://codeclimate.com/github/aenglisc/difference-checker/coverage)
-[![Build Status](https://travis-ci.org/aenglisc/difference-checker.svg?branch=master)](https://travis-ci.org/aenglisc/difference-checker)
+[![Code Climate](https://codeclimate.com/github/aenglisc/Difference-Checker/badges/gpa.svg)](https://codeclimate.com/github/aenglisc/Difference-Checker)
+[![Issue Count](https://codeclimate.com/github/aenglisc/Difference-Checker/badges/issue_count.svg)](https://codeclimate.com/github/aenglisc/Difference-Checker)
+[![Test Coverage](https://codeclimate.com/github/aenglisc/Difference-Checker/badges/coverage.svg)](https://codeclimate.com/github/aenglisc/Difference-Checker/coverage)
+[![Build Status](https://travis-ci.org/aenglisc/Difference-Checker.svg?branch=master)](https://travis-ci.org/aenglisc/Difference-Checker)
 
 Allows you to check two configuration files (.json, .yml, .ini) for differences.
 
