@@ -10,8 +10,6 @@ engines:
       - php
   eslint:
     enabled: true
-    extends:
-      - 'airbnb-base'
   fixme:
     enabled: true
 ratings:
