@@ -10,8 +10,9 @@ engines:
       - php
   eslint:
     enabled: true
-    extends:
-      - 'airbnb-base'
+    checks:
+      import/extensions:
+        enabled: false
   fixme:
     enabled: true
 ratings:
