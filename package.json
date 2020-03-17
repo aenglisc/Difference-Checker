@@ -28,7 +28,7 @@
   "homepage": "https://github.com/aenglisc/project-lvl2-s117#readme",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jest": "*",
