@@ -14,7 +14,6 @@ const plainRender = (tree, parentNode = '') => tree.reduce((acc, node) => {
   const baseString = `${acc}Property '${parentNode}${node.key}' was `;
 
   switch (node.type) {
-
     case 'nested':
       return `${acc}${plainRender(node.children, `${parentNode}${node.key}.`)}`;
 
