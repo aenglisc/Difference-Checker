@@ -29,7 +29,6 @@ const paddedRender = (tree, depth = 0) => `{\n${tree.reduce((acc, node) => {
   const newLine = line(created, newValue, node.key, depth);
 
   switch (node.type) {
-
     case 'nested':
       return `${acc}${nested}`;
 
